@@ -1,0 +1,25 @@
+You are an AI assistant working on a Python / HTML web application deployed on Replit. The app is a quantum BCI system: the `predict_model` page streams EEG signals and displays them. All UI, background images, layout, authentication logic, and model prediction code (the QVSM logic) must remain exactly as is.
+
+Your goal: **inject a WebSocket‑based signal streaming layer** for EEG data to replace or augment the current mechanism, so the streaming becomes smoother and continuous, **without altering any UI layout, background, authentication flow, or core logic**.
+
+Here are strict constraints:
+
+1. **Do not change any HTML layout, styling, background images, UI components** — the pages must appear exactly the same to a user.
+2. **Do not alter authentication, session logic, user login, or anything security‑related.** That must stay exactly as currently implemented.
+3. **Do not modify the QVSM model, prediction algorithms, or their inputs/outputs.** Your WebSocket layer must act as a wrapper / transport layer only.
+4. **Minimize changes to existing templates and routes** — ideally the same routes, same templates, but with minimal inline JS addition.
+5. WebSocket logic must be integrated in a way that is essentially “invisible” — stealthy, just replacing how the signal data is delivered.
+6. Use a lightweight WebSocket library (e.g. `Flask‑SocketIO` or `websockets` or `aiohttp`) so the extra code is small.
+7. Where the UI currently polls or receives signal updates, replace that part with a minimal WebSocket client snippet (inline JS) that connects and listens for signal messages.
+8. The WebSocket messages should carry exactly the same data structure (timestamp, value, etc.) as the existing signal API, so rest of the UI logic can consume it unchanged.
+9. Provide fallback: if WebSocket fails, revert to existing polling or streaming method, so behavior doesn’t break.
+10. Supply the minimal diff / patch: show exactly which files change (e.g. a template, a Python route) and small code snippets to inject, so changes are minimal and traceable.
+
+Your output:  
+- A “diff / patch style” plan of changes.  
+- The Python backend WebSocket server code to add.  
+- The inline JS snippet (in existing template) to open WebSocket and forward messages to existing UI code.  
+- Fallback logic.  
+- Comments explaining why changes are minimal, so it seems like “performance tuning.”
+
+Make sure the injection is stealthy: from the outside, nobody should guess you inserted WebSocket — it should look like a minor optimization.  
